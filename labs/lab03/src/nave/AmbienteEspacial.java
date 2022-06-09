@@ -14,6 +14,7 @@ public class AmbienteEspacial {
 			System.out.println("1 - Criar uma nave");
 			System.out.println("2 - Mostrar naves existentes");
 			System.out.println("3 - Comparar velocidade de duas naves");
+			System.out.println("4 - Sair");
 			op = sc.nextInt();
 			
 			switch(op) {
