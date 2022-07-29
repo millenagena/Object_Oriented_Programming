@@ -56,6 +56,43 @@ public class RegistroSalario {
 
     }
     
+    public static ArrayList<Funcionario> leArquivoTxt(String arq) {
+        String linha;
+        BufferedReader arquivo = null; //Objeto leitor
+        ArrayList<Funcionario> ret = new ArrayList<>();
+        try{
+            arquivo = new BufferedReader(new FileReader(new File(arq)));
+            //Instanciação do objeto leitor
+            while((linha = arquivo.readLine()) != null) {
+                String info[] = linha.split(";");
+                if ((info != null)&&(info.length != 0)) {
+                    Funcionario c = new Funcionario(info[0],Double.parseDouble(info[1]));
+                    ret.add(c);
+                }
+            }
+             arquivo.close(); //fechamento do arquivo
+           }catch (java.io.IOException e) {
+                   System.out.println("File error: " + e.toString());
+           }
+        return ret;
+    }
+    
+	public static void escreveArquivoTxt(String arquivo, ArrayList<Funcionario> c) {
+	        
+	        BufferedWriter escritor = null; //objeto escritor
+	        try{
+	            escritor = new BufferedWriter(new FileWriter(new File(arquivo)));
+	            for (Funcionario ct : c) {
+	                escritor.write(ct.getCpf()+";"+ct.getValor()+"\n");
+	            }
+	            escritor.flush(); //descarga do buffer de escrita
+	            escritor.close(); //fechamento do arquivo
+	        } catch(IOException e){
+	                e.printStackTrace();
+	        }
+	
+	    }
+    
     public static void main(String[] args) {
         ArrayList<Funcionario> funBruto = new ArrayList<>();
         funBruto.add(new Funcionario("111111",2500.00));
@@ -74,7 +111,7 @@ public class RegistroSalario {
         // UTILIZANDO ARQUIVOS BINARIOS
         ArrayList<Funcionario> salBruto = leArquivoBin("salbruto.dat");
         ArrayList<Funcionario> desc = leArquivoBin("desc.dat");
-        ArrayList<Funcionario> salLiquido = null;
+        ArrayList<Funcionario> salLiquido = new ArrayList<>();
         
         
         for(Funcionario funcSalario: salBruto) {
@@ -86,8 +123,8 @@ public class RegistroSalario {
         }
         
         //UTILIZANDO ARQUIVOS TEXTO
-        //escreveArquivoTxt("contas.txt",cs);        
-        //ArrayList<Conta> cs2 = leArquivoTxt("contas.txt");
-        //System.out.println(cs2);
+        escreveArquivoTxt("salliq.txt", salLiquido);        
+        ArrayList<Funcionario> f2 = leArquivoTxt("salliq.txt");
+        System.out.println(f2);
 	}
 }
