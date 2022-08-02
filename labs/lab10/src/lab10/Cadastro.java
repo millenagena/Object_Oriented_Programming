@@ -34,7 +34,7 @@ public class Cadastro extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Cadastro frame = new Cadastro();
+					Cadastro frame = new Cadastro(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -46,7 +46,8 @@ public class Cadastro extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Cadastro() {
+	public Cadastro(Cliente c) {
+		
 		setTitle("Cadastro de Contas");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 560, 758);
@@ -152,6 +153,11 @@ public class Cadastro extends JFrame {
 				ArrayList<Cliente> clientes = new ArrayList<>(g.leArquivoTxt("dados.txt"));
 				clientes.add(c);
 				g.escreveArquivoTxt(clientes, "dados.txt");
+				
+				// fechando a janela e abrindo a anterior novamente
+				setVisible(false);
+				Dados d = new Dados();
+				d.setVisible(true);
 			}
 		});
 		btnSalvar.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -159,8 +165,29 @@ public class Cadastro extends JFrame {
 		contentPane.add(btnSalvar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				Dados d = new Dados();
+				d.setVisible(true);
+			}
+		});
 		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnCancelar.setBounds(421, 677, 115, 34);
 		contentPane.add(btnCancelar);
+		
+		if(c != null) {
+			nome.setText(c.getNome());
+			cpf.setText(c.getCpf());
+			email.setText(c.getEmail());
+			dataNascimento.setText(c.getDataNascimento());
+			if(c.getSexo().equals("Feminino")) {
+				comboSexo.setSelectedIndex(0);
+			}else {
+				comboSexo.setSelectedIndex(1);
+			}
+			numeroConta.setText(Integer.toString(c.getNumeroConta()));
+			checkNoticias.setSelected(c.getNoticias());
+		}
 	}
 }

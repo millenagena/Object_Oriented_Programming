@@ -49,7 +49,7 @@ public class Dados extends JFrame {
 		btnPreencherDados.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnPreencherDados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Cadastro cad = new Cadastro();
+				Cadastro cad = new Cadastro(null);
 				cad.setVisible(true);
 				setVisible(false);
 			}
@@ -58,6 +58,13 @@ public class Dados extends JFrame {
 		contentPane.add(btnPreencherDados);
 		
 		JButton btnVisualizarDados = new JButton("Visualizar dados");
+		btnVisualizarDados.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VisualizaDados v = new VisualizaDados();
+				v.setVisible(true);
+				setVisible(false);
+			}
+		});
 		btnVisualizarDados.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnVisualizarDados.setBounds(95, 188, 187, 63);
 		contentPane.add(btnVisualizarDados);

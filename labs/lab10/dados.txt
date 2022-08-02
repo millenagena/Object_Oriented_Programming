@@ -1,3 +1,2 @@
-ana;123;ana@oi;456;Feminino;789;true
-jao;123;ana@oi;456;Masculino;789;false
-Maria;dadada;maria@oi;4844;Feminino;6462;false
+milena;555555;millena@oi;123456;Feminino;789456;true
+lucas;478569;lucas@ri;123456;Masculino;74;true

@@ -75,10 +75,9 @@ public class VisualizaDados extends JFrame {
 				
 				for(Cliente c: clientes) {
 					if(cpf.equals(c.getCpf())) {
-						Cadastro cad = new Cadastro();
-						cad.setVisible(true);
-						// parei aqui
-						
+						Cadastro cad = new Cadastro(c);
+						cad.setVisible(true);			
+						setVisible(false);
 					}
 				}
 			}
